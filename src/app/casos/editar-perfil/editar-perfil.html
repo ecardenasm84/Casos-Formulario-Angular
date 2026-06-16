@@ -1,0 +1,80 @@
+<div class="form-card">
+
+    <h2 class="form-title">
+        Caso 2: Edición de Perfil
+    </h2>
+
+    <p class="form-description">
+        Formulario reactivo con carga de datos usando patchValue y actualización de perfil.
+    </p>
+
+    <form [formGroup]="perfilForm" (ngSubmit)="guardar()" class="form-container">
+
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" formControlName="nombre" placeholder="Ingrese su nombre">
+
+            <p class="error-message" *ngIf="campoInvalido('nombre')">
+                El nombre es obligatorio.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="ejemplo@gmail.com">
+
+            <p class="error-message" *ngIf="campoInvalido('email')">
+                Ingrese un email válido.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Edad</label>
+            <input type="number" formControlName="edad" placeholder="Ingrese su edad">
+
+            <p class="error-message" *ngIf="campoInvalido('edad')">
+                La edad es obligatoria y debe ser mayor a 0.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Número de teléfono</label>
+            <input type="text" formControlName="telefono" placeholder="Opcional">
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" formControlName="notificaciones" id="notificaciones">
+
+            <label for="notificaciones">
+                Deseo recibir notificaciones
+            </label>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-save" [disabled]="perfilForm.invalid">
+                Guardar
+            </button>
+
+            <button type="button" class="btn-reset" (click)="restablecer()">
+                Restablecer
+            </button>
+        </div>
+
+    </form>
+
+    <div class="summary-card" *ngIf="resumenActualizado">
+
+        <h3>Resumen de datos actualizados</h3>
+
+        <p><strong>Nombre:</strong> {{ resumenActualizado.nombre }}</p>
+        <p><strong>Email:</strong> {{ resumenActualizado.email }}</p>
+        <p><strong>Edad:</strong> {{ resumenActualizado.edad }}</p>
+        <p><strong>Teléfono:</strong> {{ resumenActualizado.telefono || 'No registrado' }}</p>
+        <p>
+            <strong>Notificaciones:</strong>
+            {{ resumenActualizado.notificaciones ? 'Activadas' : 'Desactivadas' }}
+        </p>
+
+    </div>
+
+</div>

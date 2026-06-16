@@ -1,0 +1,76 @@
+<div class="form-card">
+
+    <h2 class="form-title">
+        Caso 1: Registro de Usuario
+    </h2>
+
+    <p class="form-description">
+        Formulario reactivo con validaciones usando FormGroup, FormBuilder y Validators.
+    </p>
+
+    <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="form-container">
+
+        <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" formControlName="nombreCompleto" placeholder="Ingrese su nombre completo">
+
+            <p class="error-message" *ngIf="campoInvalido('nombreCompleto')">
+                El nombre completo es obligatorio.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" formControlName="correo" placeholder="ejemplo@gmail.com">
+
+            <p class="error-message" *ngIf="campoInvalido('correo')">
+                Ingrese un correo electrónico válido.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres">
+
+            <p class="error-message" *ngIf="campoInvalido('password')">
+                La contraseña es obligatoria y debe tener mínimo 6 caracteres.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Confirmar contraseña</label>
+            <input type="password" formControlName="confirmarPassword" placeholder="Repita la contraseña">
+
+            <p class="error-message" *ngIf="campoInvalido('confirmarPassword')">
+                Debe confirmar la contraseña.
+            </p>
+
+            <p class="error-message"
+                *ngIf="registroForm.errors?.['passwordsNoCoinciden'] && registroForm.get('confirmarPassword')?.touched">
+                Las contraseñas no coinciden.
+            </p>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" formControlName="terminos" id="terminos">
+
+            <label for="terminos">
+                Acepto los términos y condiciones
+            </label>
+        </div>
+
+        <p class="error-message" *ngIf="campoInvalido('terminos')">
+            Debe aceptar los términos y condiciones.
+        </p>
+
+        <button type="submit" class="btn-register">
+            Registrar
+        </button>
+
+    </form>
+
+    <div class="success-message" *ngIf="mensajeConfirmacion">
+        {{ mensajeConfirmacion }}
+    </div>
+
+</div>
